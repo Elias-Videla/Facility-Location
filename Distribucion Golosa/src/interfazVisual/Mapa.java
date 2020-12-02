@@ -57,8 +57,11 @@ public class Mapa {
 		panelOpciones.setBounds(732, 30, 238, 234);
 		panelOpciones.setVisible(false);
 		frame.getContentPane().add(panelOpciones);
+		panelOpciones.setLayout(null);
 		
-		JLabel lblHola = new JLabel("hola");
+		JLabel lblHola = new JLabel("");
+		lblHola.setIcon(new ImageIcon(Mapa.class.getResource("/imagenes/Contenedor.png")));
+		lblHola.setBounds(0, 0, 238, 234);
 		panelOpciones.add(lblHola);
 		panelOpciones.addMouseListener( new MouseAdapter() {
 			@Override

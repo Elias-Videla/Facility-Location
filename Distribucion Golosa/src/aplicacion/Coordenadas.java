@@ -1,7 +1,10 @@
 package aplicacion;
 
-public class Coordenadas 
+import java.io.Serializable;
+
+public class Coordenadas implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	private int identificacion;
 	private double latitud, longitud;
 	
