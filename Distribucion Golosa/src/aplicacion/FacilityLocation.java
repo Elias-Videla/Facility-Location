@@ -9,6 +9,7 @@ public class FacilityLocation
 	ArrayList<Coordenadas> centros;
 	ArrayList<Coordenadas> clientes;
 	
+	
 	public static ArrayList<Coordenadas> obtenerCentrosCercanos
 			(int k , ArrayList <Coordenadas> centros , ArrayList <Coordenadas> clientes)
 	{
@@ -18,6 +19,9 @@ public class FacilityLocation
 		
 		while( centros.size() != k ) 
 		{
+			if( i == clientes.size())
+				i = 0;
+			
 			int indice_centro_mayor_distancia = obtenerCentroMayorDistancia(clientes.get(i), centros);
 			
 			centros.remove(indice_centro_mayor_distancia);
@@ -28,6 +32,7 @@ public class FacilityLocation
 		
 		return centros;
 	}
+	
 	
 	//Metodos privados ------------------------------------------------------------------------------------------------
 	
@@ -40,8 +45,8 @@ public class FacilityLocation
 		
 		for(int i = 1; i < centros.size(); i++) 
 		{
-			double distancia_centro = Semiverseno.distancia(cliente.latitud(), cliente.longitud(),
-					centros.get(i).latitud(), centros.get(i).longitud());
+			double distancia_centro = Semiverseno.distancia( cliente.latitud(), cliente.longitud(),
+					centros.get( i ).latitud(), centros.get( i ).longitud() );
 			
 			if(mayorDistancia < distancia_centro) 
 			{
@@ -58,9 +63,9 @@ public class FacilityLocation
 	private static void irepParametroK(int k, int cantidadCentros) 
 	{
 		if(k <= 0)
-			throw new IllegalArgumentException("El parametro no puede ser menor igual a cero: " + k);
+			throw new IllegalArgumentException("El parametro no puede ser menor igual a cero: " + cantidadCentros);
 		if(k > cantidadCentros)
-			throw new IllegalArgumentException("El parametro no puede ser mayor a la cantidad de centros: " + k);
+			throw new IllegalArgumentException("El parametro no puede ser mayor a la cantidad de centros: " + cantidadCentros);
 	}
 	
 	

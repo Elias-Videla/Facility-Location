@@ -27,9 +27,9 @@ public class CentrosCercanosTest
 		ArrayList<Coordenadas> clientes = repositorio.clientes();
 		ArrayList<Coordenadas> centros = repositorio.centros();
 		int numeroCentroCorrecto = 1;
-		int cantidadCentrosAbiertos = 1;
+		int k = 1;
 		
-		ArrayList<Coordenadas> resultado = FacilityLocation.obtenerCentrosCercanos(cantidadCentrosAbiertos, centros, clientes);
+		ArrayList<Coordenadas> resultado = FacilityLocation.obtenerCentrosCercanos(k, centros, clientes);
 		
 		assertEquals(numeroCentroCorrecto, resultado.get(0).identificacion());
 	}
@@ -41,9 +41,9 @@ public class CentrosCercanosTest
 		ArrayList<Coordenadas> clientes = repositorio.clientes();
 		ArrayList<Coordenadas> centros = repositorio.centros();
 		
-		int cantidadCentrosAbiertos = -1;
+		int k = -1;
 		
-		FacilityLocation.obtenerCentrosCercanos(cantidadCentrosAbiertos, centros, clientes);
+		FacilityLocation.obtenerCentrosCercanos(k, centros, clientes);
 	}
 	
 	
@@ -53,9 +53,42 @@ public class CentrosCercanosTest
 		ArrayList<Coordenadas> clientes = repositorio.clientes();
 		ArrayList<Coordenadas> centros = repositorio.centros();
 		
-		int cantidadCentrosAbiertos = 7;
+		int k = 7;
 		
-		FacilityLocation.obtenerCentrosCercanos(cantidadCentrosAbiertos, centros, clientes);
+		FacilityLocation.obtenerCentrosCercanos(k, centros, clientes);
+	}
+	
+	
+	@Test 
+	public void parametroIgualACantidadCentrosTest() 
+	{
+		ArrayList<Coordenadas> clientes = repositorio.clientes();
+		ArrayList<Coordenadas> centros = repositorio.centros();
+		
+		int k = 6;
+		
+		ArrayList<Coordenadas> resultado = FacilityLocation.obtenerCentrosCercanos( k, centros, clientes );
+		
+		assertEquals( 6, resultado.size() );
+	}
+	
+	
+	@Test 
+	public void cantidadClientesMenorACantidadCentrosTest() 
+	{
+		ArrayList<Coordenadas> clientes = new ArrayList<Coordenadas>();
+		ArrayList<Coordenadas> centros  = repositorio.centros();
+		
+		clientes.add(repositorio.clientes().get(0));
+		clientes.add(repositorio.clientes().get(1));
+		
+		int k = 1;
+		int numeroCentroCorrecto = 2;
+		
+		ArrayList<Coordenadas> resultado = FacilityLocation.obtenerCentrosCercanos( k, centros, clientes );
+		
+		assertEquals(numeroCentroCorrecto, resultado.get(0).identificacion());
+		
 	}
 
 }
