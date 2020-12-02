@@ -11,8 +11,9 @@ public class FacilityLocation
 	
 	public static ArrayList<Coordenadas> obtenerCentrosCercanos
 			(int k , ArrayList <Coordenadas> centros , ArrayList <Coordenadas> clientes)
-			//irep de k illegal argument exception
 	{
+		irepParametroK(k, centros.size());
+		
 		int i = 0;
 		
 		while( centros.size() != k ) 
@@ -28,10 +29,11 @@ public class FacilityLocation
 		return centros;
 	}
 	
-	//debe ser privada
+	//Metodos privados ------------------------------------------------------------------------------------------------
+	
 	private static int obtenerCentroMayorDistancia(Coordenadas cliente, ArrayList<Coordenadas> centros) 
 	{
-		int mayor = 0;
+		int indiceDelMayor = 0;
 		
 		double mayorDistancia = Semiverseno.distancia(cliente.latitud(), cliente.longitud(),
 				centros.get(0).latitud(), centros.get(0).longitud());
@@ -44,12 +46,40 @@ public class FacilityLocation
 			if(mayorDistancia < distancia_centro) 
 			{
 				mayorDistancia = distancia_centro;
-				mayor = i;
+				indiceDelMayor = i;
 			}
 			
 		}
-		return mayor;
+		return indiceDelMayor;
 	}
+	
+	
+	
+	private static void irepParametroK(int k, int cantidadCentros) 
+	{
+		if(k <= 0)
+			throw new IllegalArgumentException("El parametro no puede ser menor igual a cero: " + k);
+		if(k > cantidadCentros)
+			throw new IllegalArgumentException("El parametro no puede ser mayor a la cantidad de centros: " + k);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public static void main(String[] args) 
