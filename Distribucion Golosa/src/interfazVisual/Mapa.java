@@ -1,21 +1,32 @@
 package interfazVisual;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JRadioButton;
+
+import aplicacion.Coordenadas;
+//import aplicacion.FacilityLocation;
+import aplicacion.Principal;
+
 import java.awt.Cursor;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import java.awt.Dimension;
 
 public class Mapa {
 
@@ -26,6 +37,11 @@ public class Mapa {
 	//private ImageIcon[] chinchesClientes;
 	private JLabel chinchesClientes1, chinchesClientes2, chinchesClientes3, chinchesClientes4;
 	private JLabel chinchesCentros1, chinchesCentros2, chinchesCentros3;
+	private JRadioButton botonClientes1, botonClientes2, botonClientes3, botonClientes4;
+	private JRadioButton botonCentros1, botonCentros2, botonCentros3;
+	private ArrayList<Coordenadas> clientes, centros;
+	@SuppressWarnings("rawtypes")
+	private JComboBox cantidadAbiertos;
 
 	/**
 	 * Launch the application.
@@ -55,16 +71,17 @@ public class Mapa {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	private void initialize() 
 	{
-//		chinchesClientes = new ImageIcon[4];
-//		chinchesClientes[0] = new ImageIcon(Mapa.class.getResource("/imagenes/clientes-1.png"));
-//		chinchesClientes[1] = new ImageIcon(Mapa.class.getResource("/imagenes/clientes-2.png"));
-//		chinchesClientes[2] = new ImageIcon(Mapa.class.getResource("/imagenes/clientes-3.png"));
-		//chinchesClientes[3] = new ImageIcon(Mapa.class.getResource("/imagenes/clientes-4.png"));
+
 		ManejoArchivos archivos = new ManejoArchivos();
+		//Principal principal = new Principal();
 		archivos.descargarArchivoCentros();
 		archivos.descargarArchivoClientes();
+		
+		clientes = new ArrayList<Coordenadas>();
+		centros  = new ArrayList<Coordenadas>();
 		
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -131,7 +148,7 @@ public class Mapa {
 		panelOpciones.add(minimizar);
 		
 		
-		JRadioButton botonClientes1 = new JRadioButton("1");
+		botonClientes1 = new JRadioButton("1");
 		botonClientes1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -148,7 +165,7 @@ public class Mapa {
 		botonGroupClientes.add(botonClientes1);
 		
 		
-		JRadioButton botonClientes2 = new JRadioButton("2");
+		botonClientes2 = new JRadioButton("2");
 		botonClientes2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -165,7 +182,7 @@ public class Mapa {
 		botonGroupClientes.add(botonClientes2);
 		
 		
-		JRadioButton botonClientes3 = new JRadioButton("3");
+		botonClientes3 = new JRadioButton("3");
 		botonClientes3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -181,7 +198,7 @@ public class Mapa {
 		panelOpciones.add(botonClientes3);
 		botonGroupClientes.add(botonClientes3);
 		
-		JRadioButton botonClientes4 = new JRadioButton("4");
+		botonClientes4 = new JRadioButton("4");
 		botonClientes4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -199,7 +216,7 @@ public class Mapa {
 		
 		
 		
-		JRadioButton botonCentros1 = new JRadioButton("1");
+		botonCentros1 = new JRadioButton("1");
 		botonCentros1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -210,11 +227,11 @@ public class Mapa {
 			}
 		});
 		botonCentros1.setOpaque(false);
-		botonCentros1.setBounds(21, 125, 41, 23);
+		botonCentros1.setBounds(21, 117, 41, 23);
 		panelOpciones.add(botonCentros1);
 		botonGroupCentros.add(botonCentros1);
 		
-		JRadioButton botonCentros2 = new JRadioButton("2");
+		botonCentros2 = new JRadioButton("2");
 		botonCentros2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -225,11 +242,11 @@ public class Mapa {
 			}
 		});
 		botonCentros2.setOpaque(false);
-		botonCentros2.setBounds(64, 125, 41, 23);
+		botonCentros2.setBounds(64, 117, 41, 23);
 		panelOpciones.add(botonCentros2);
 		botonGroupCentros.add(botonCentros2);
 		
-		JRadioButton botonCentros3 = new JRadioButton("3");
+		botonCentros3 = new JRadioButton("3");
 		botonCentros3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -240,7 +257,7 @@ public class Mapa {
 			}
 		});
 		botonCentros3.setOpaque(false);
-		botonCentros3.setBounds(111, 125, 41, 23);
+		botonCentros3.setBounds(111, 117, 41, 23);
 		panelOpciones.add(botonCentros3);
 		botonGroupCentros.add(botonCentros3);
 		
@@ -252,19 +269,25 @@ public class Mapa {
 		
 		JLabel lblConjuntosDeCentros = new JLabel("Conjuntos de centros");
 		lblConjuntosDeCentros.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblConjuntosDeCentros.setBounds(21, 95, 156, 23);
+		lblConjuntosDeCentros.setBounds(21, 87, 156, 23);
 		panelOpciones.add(lblConjuntosDeCentros);
 		
 		JLabel lblCentrosAbiertos = new JLabel("Centros abiertos");
 		lblCentrosAbiertos.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblCentrosAbiertos.setBounds(80, 177, 116, 19);
+		lblCentrosAbiertos.setBounds(80, 153, 116, 19);
 		panelOpciones.add(lblCentrosAbiertos);
 		
-		@SuppressWarnings("rawtypes")
-		JComboBox cantidadAbiertos = new JComboBox();
-		cantidadAbiertos.setBounds(21, 175, 41, 23);
+		cantidadAbiertos = new JComboBox();
+		cantidadAbiertos.setBounds(21, 151, 41, 23);
 		panelOpciones.add(cantidadAbiertos);
 		crearComboBox(cantidadAbiertos);
+		
+		JCheckBox checkBusquedaIntensiva = new JCheckBox("Busqueda intensiva");
+		checkBusquedaIntensiva.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		checkBusquedaIntensiva.setOpaque(false);
+		checkBusquedaIntensiva.setSize(new Dimension(50, 50));
+		checkBusquedaIntensiva.setBounds(21, 179, 165, 50);
+		panelOpciones.add(checkBusquedaIntensiva);
 		
 		
 		
@@ -279,6 +302,7 @@ public class Mapa {
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
+				JOptionPane.showMessageDialog( null, "Elias Gonez \n Gracias por todo profes :)" );
 				System.exit( 0 );
 			}
 		});
@@ -300,6 +324,55 @@ public class Mapa {
 		
 		
 		JButton botonCalcular = new JButton("");
+		botonCalcular.addActionListener(new ActionListener() 
+		{
+			@SuppressWarnings("unchecked")
+			public void actionPerformed( ActionEvent arg0 ) 
+			{
+				controlDeRadioButtons();
+				int k = obtenerValorComboBox();
+				
+				
+				
+				if(algunBotonClienteSeleccionado() && algunBotonCentrosSeleccionado()) 
+				{
+
+					clientes = (ArrayList<Coordenadas>) archivos.conjuntosClientes().get(indiceClientes()).clone();
+					centros  = (ArrayList<Coordenadas>) archivos.conjuntosCentros().get(indiceCentros()).clone(); 
+					
+					if( k > centros.size()) 
+					{
+						JOptionPane.showMessageDialog( null, "La cantidad de centros seleccionada es mayor a "
+								+ "la cantidad permitida por el conjunto de tamanio " + centros.size() );
+					}
+					else 
+					{
+						ArrayList<Coordenadas> resultado = new ArrayList<Coordenadas>();
+
+						if(checkBusquedaIntensiva.isSelected()) 
+						{
+							resultado = Principal.hacerBusquedaIntensiva(k, centros, clientes);
+						}
+						else 
+						{
+							resultado = Principal.obtenerCentrosCercanos(k, centros, clientes);
+						}
+
+						int numeroCentro;
+
+						numeroCentro = resultado.get(0).identificacion();
+						JOptionPane.showMessageDialog( null, "Numero de centro: " + numeroCentro +"\n tamano cliente " +
+								clientes.size() + " tamano centros " + centros.size());
+					}
+				}
+			}
+
+			
+
+		
+
+			
+		} );
 		botonCalcular.setIcon(new ImageIcon(Mapa.class.getResource("/imagenes/CALCULAR.png")));
 		botonCalcular.setFocusPainted( false );
 		botonCalcular.setBorderPainted( false );
@@ -382,5 +455,58 @@ public class Mapa {
 		cBox.addItem( "6" );
 	}
 	
+	private boolean algunBotonClienteSeleccionado() 
+	{
+		if(botonClientes1.isSelected() || botonClientes2.isSelected() || botonClientes3.isSelected() 
+				||botonClientes4.isSelected())
+			return true;
+		else
+			return false;
+	}
 	
+	private boolean algunBotonCentrosSeleccionado() 
+	{
+		if(botonCentros1.isSelected() || botonCentros2.isSelected() || botonCentros3.isSelected())
+			return true;
+		else
+			return false;
+	}
+	
+	private int indiceClientes() 
+	{
+		if(botonClientes1.isSelected()) { return 0; }
+		
+		if(botonClientes2.isSelected()) { return 1; }
+		
+		if(botonClientes3.isSelected()) { return 2; }
+		
+		if(botonClientes4.isSelected()) { return 3; }
+		
+		return -1;
+	}
+	
+	private int indiceCentros() 
+	{
+		if(botonCentros1.isSelected()) { return 0; }
+		
+		if(botonCentros2.isSelected()) { return 1; }
+		
+		if(botonCentros3.isSelected()) { return 2; }
+		
+		return -1;
+	}
+	
+	private void controlDeRadioButtons() 
+	{
+		if( !algunBotonClienteSeleccionado() ) 
+			JOptionPane.showMessageDialog( null, "Seleccione un conjunto de clientes en la configuracion" );
+		
+		if( !algunBotonCentrosSeleccionado() ) 
+			JOptionPane.showMessageDialog( null, "Seleccione un conjunto de centros en la configuracion" );
+	}
+	
+	private int obtenerValorComboBox() 
+	{
+		return Integer.parseInt(cantidadAbiertos.getSelectedItem().toString());
+	}
 }

@@ -10,6 +10,14 @@ public class ManejoArchivos
 {
 	private  ArrayList<Coordenadas> clientes1, clientes2, clientes3, clientes4;
 	private  ArrayList<Coordenadas> centros1, centros2, centros3;
+	private ArrayList<ArrayList<Coordenadas>> conjuntosClientes;
+	private ArrayList<ArrayList<Coordenadas>> conjuntosCentros;
+	
+	ManejoArchivos()
+	{
+		conjuntosClientes = new ArrayList<ArrayList<Coordenadas>>();
+		conjuntosCentros  = new ArrayList<ArrayList<Coordenadas>>();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public void descargarArchivoClientes() 
@@ -23,7 +31,11 @@ public class ManejoArchivos
 			clientes2 = ( ArrayList< Coordenadas > ) in.readObject();
 			clientes3 = ( ArrayList< Coordenadas > ) in.readObject();
 			clientes4 = ( ArrayList< Coordenadas > ) in.readObject();
-
+			
+			conjuntosClientes.add(clientes1);
+			conjuntosClientes.add(clientes2);
+			conjuntosClientes.add(clientes3);
+			conjuntosClientes.add(clientes4);
 			in.close();
 		}
 		catch( Exception ex ) 
@@ -43,6 +55,10 @@ public class ManejoArchivos
 			centros1 = ( ArrayList< Coordenadas > ) in.readObject();
 			centros2 = ( ArrayList< Coordenadas > ) in.readObject();
 			centros3 = ( ArrayList< Coordenadas > ) in.readObject();
+			
+			conjuntosCentros.add(centros1);
+			conjuntosCentros.add(centros2);
+			conjuntosCentros.add(centros3);
 
 			in.close();
 		}
@@ -87,6 +103,14 @@ public class ManejoArchivos
 		return centros3;
 	}
 	
+	public ArrayList<ArrayList<Coordenadas>> conjuntosClientes()
+	{
+		return conjuntosClientes;
+	}
 	
+	public ArrayList<ArrayList<Coordenadas>> conjuntosCentros()
+	{
+		return conjuntosCentros;
+	}
 	
 }
