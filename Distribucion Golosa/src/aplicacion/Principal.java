@@ -8,17 +8,10 @@ public class Principal
 	(int k, ArrayList<Coordenadas> centros, ArrayList<Coordenadas> clientes)
 	{
 		irepParametroK(k, centros.size());
-		ArrayList<Coordenadas> resultado = FacilityLocation.obtenerCentrosCercanos(k, centros, clientes);
-		double suma = FacilityLocation.sumatoria(resultado.get(0), clientes);
-		System.out.println("sumaaa " + suma);
 		return FacilityLocation.obtenerCentrosCercanos(k, centros, clientes);
 	}
 	
-	public static ArrayList<Coordenadas> segundaBusquedaCentrosCercanos
-	(int k, ArrayList<Coordenadas> centros, ArrayList<Coordenadas> clientes)
-	{
-		return FacilityLocation.obtenerCentrosCercanosInverso(k, centros, clientes);
-	}
+
 	
 	public static ArrayList<Coordenadas> hacerBusquedaIntensiva
 	(int k, ArrayList<Coordenadas> centros, ArrayList<Coordenadas> clientes)
@@ -44,7 +37,7 @@ public class Principal
 		
 	}
 
-	private static double costoTotal(ArrayList<Coordenadas> clientes, ArrayList<Coordenadas> centros) 
+	public static double costoTotal(ArrayList<Coordenadas> clientes, ArrayList<Coordenadas> centros) 
 	{
 		double sumatoria = 0.0;
 		
@@ -55,6 +48,14 @@ public class Principal
 		
 		return sumatoria;
 	}
+	
+//	public static ArrayList<Coordenadas> segundaBusquedaCentrosCercanos
+//	(int k, ArrayList<Coordenadas> centros, ArrayList<Coordenadas> clientes)
+//	{
+//		return FacilityLocation.obtenerCentrosCercanosInverso(k, centros, clientes);
+//	}
+	
+	//Metodos privados--------------------------------------------------------------------------------------------------
 	
 	private static void irepParametroK(int k, int cantidadCentros) 
 	{
