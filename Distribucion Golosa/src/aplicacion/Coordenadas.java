@@ -9,7 +9,7 @@ public class Coordenadas implements Serializable
 	private double latitud, longitud;
 	
 	
-	Coordenadas(int identificacion, double latitud, double longitud)
+	Coordenadas( int identificacion, double latitud, double longitud )
 	{
 		this.identificacion = identificacion;
 		this.latitud        = latitud;
