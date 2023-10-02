@@ -57,7 +57,7 @@ Contiene la clase Semiverseno que se ocupa de calcular la distancia de coordenad
 Se encarga de obtener y retornar los centros más cercanos para abrir. Además tiene un método que calcula la distancia de un centro con todos sus clientes.
 
 - obtenerCentrosCercanos(int k, ArrayList<Coordenadas> centros, ArrayList<Coordenadas> clientes): Recibe la cantidad de centros que desean abrir, una lista de centros y una lista de clientes.
-- obtenerCentrosCercanosInverso(int k, ArrayList<Coordenadas> centros, ArrayList<Coordenadas> clientes): Hace la misma función que el método anterior con la diferencia que realiza el recorrido de clientes de forma inversa, del último al primero. De esta forma se busca un segundo resultado para comparar con el primer método y comparar la mejor discancia total.
+- obtenerCentrosCercanosInverso(int k, ArrayList<Coordenadas> centros, ArrayList<Coordenadas> clientes): Hace la misma función que el método anterior con la diferencia que realiza el recorrido de clientes de forma inversa, del último al primero. De esta forma se busca un segundo resultado para comparar con el primer método y comparar la mejor distancia total.
 - sumatoria(Coordenadas centros, ArrayList<Coordenadas> clientes): Recibe un centro con una lista de clientes y calcula la distancia total del centro con todos los clientes.
 
 ### Principal
